@@ -2,7 +2,7 @@
 # This is the sole property of V, if you steal it i'll fuck you up (prolly not but still dont)
 
 import undetected_chromedriver.v2 as uc
-import os, re, time
+import os, re, time, pickle
 
 # selenium imports
 from selenium.webdriver.support.ui import WebDriverWait
@@ -29,6 +29,7 @@ class Target:
         options.add_argument('--password_manager_enables=false')
         # Creates and returns the configured driver
         driver = uc.Chrome(options=options)
+        driver.maximize_window()
         return driver
 
     def tearDown(self):
@@ -59,8 +60,8 @@ class Target:
     def checkout_item(self, link:str, username:str, password:str, **kwargs):
         self.driver.get(link)
         # Finding the shipIt // Add to card button
-        checkout_box = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
-            (By.CSS_SELECTOR, '.styles__ShippingWrapper-sc-13vnt8-0')
+        button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '.eVHdWy')
         ))
         # Get product name
         heading = self.driver.find_element_by_css_selector('.Heading__StyledHeading-sc-1mp23s9-0')
@@ -71,38 +72,44 @@ class Target:
             self.LOG(f"Looking for: {name}")
             assert name==heading_text, f'Link points to {heading_text} instead of {name}'
         # Add a check here if checkout_box.text matches r'Ship it' otherwise its out of stock
-        buttons = self.driver.find_elements_by_tag_name('button')
-        button = list(filter(lambda x: x.text=='Ship it', buttons))[0]
+        # button = self.driver.find_element_by_css_selector('.eVHdWy').click()
         button.click()
         # There's a popup here that I need to get past
             # This gives time for the popup to appear
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, '.styles__AddToCartHeading-mrt3qe-1')
         ))
-        new_buttons = self.driver.find_elements_by_tag_name('button')
-        checkout_button = list(filter(lambda x: x.text=='View cart & checkout', new_buttons))[0]
-        checkout_button.click()
+        view_and_checkout_btn = self.driver.find_element_by_css_selector('.bWbIIU')
+        # new_buttons = self.driver.find_elements_by_tag_name('button')
+        # checkout_button = list(filter(lambda x: x.text=='View cart & checkout', new_buttons))[0]
+        view_and_checkout_btn.click()
         # Move from cart to checkout section
-        # Wait for new page to load
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
+        # BUTTON : "I'm ready to check out"
+        checkout_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(
             (By.CSS_SELECTOR, '.kmdQZX')
         ))
-        more_buttons = self.driver.find_elements_by_tag_name('button')
-        anotha_button = list(filter(lambda x: x.text=="I'm ready to check out", more_buttons))[0]
-        anotha_button.click()
+        checkout_btn.click()
+        # more_buttons = self.driver.find_elements_by_tag_name('button')
+        # anotha_button = list(filter(lambda x: x.text=="I'm ready to check out", more_buttons))[0]
+        # anotha_button.click()
         # Allows target login to be skipped
         try:
             # Sign into target account
-            username_input = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
-                (By.NAME, 'username')
+            login_card = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located( 
+                (By.TAG_NAME, 'form')
             ))
+            username_input = self.driver.find_elements_by_name('username')
+            # password_input = self.driver.find_element_by_css_selector('.bhhAF')
             password_input = self.driver.find_element_by_name('password')
             # Input username and password
-            username_input.send_keys(username)
+            if len(username_input)!=0:
+                username_input[0].send_keys(username)
             password_input.send_keys(password)
             # Click the signin button
-            so_many_buttons = self.driver.find_elements_by_tag_name('button')
-            sign_in_button = list(filter(lambda x: x.text=="Sign in", so_many_buttons))[0]
+            sign_in_button = self.driver.find_elements_by_css_selector('.kmdQZX')
+            sign_in_button = list(filter(lambda x: x.text=='Sign in', sign_in_button))[0]
+            # so_many_buttons = self.driver.find_elements_by_tag_name('button')
+            # sign_in_button = list(filter(lambda x: x.text=="Sign in", so_many_buttons))[0]
             sign_in_button.click()
         except Exception as e:
             self.LOG('Skipped login page')
@@ -119,7 +126,11 @@ class Target:
         # Finally fill out the personal information and the card shit
         try:
             # inna try block in case the personal informations already ready
-            pass
+            with open('checkout_info.pickle', 'rb') as f:
+                info = pickle.load(f)
+            sections = list(info) # Gets a list of each attribute
+            for i in sections:
+                self.driver.find_element_by_name(i).send_keys(info.iloc[0][i])
         except Exception as e:
             self.LOG('Failed checkout process, please try again')
 
