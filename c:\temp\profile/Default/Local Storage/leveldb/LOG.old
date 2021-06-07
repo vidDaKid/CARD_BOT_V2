@@ -1,3 +1,6 @@
-2021/06/05-21:01:32.866 4e07 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/Local Storage/leveldb/MANIFEST-000001
-2021/06/05-21:01:32.868 4e07 Recovering log #17
-2021/06/05-21:01:32.868 4e07 Reusing old log /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/Local Storage/leveldb/000017.log 
+2021/06/07-14:10:39.866 2e03 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/Local Storage/leveldb/MANIFEST-000001
+2021/06/07-14:10:39.869 2e03 Recovering log #4
+2021/06/07-14:10:39.890 2e03 Reusing old log /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/Local Storage/leveldb/000004.log 
+2021/06/07-14:10:56.712 4707 Level-0 table #8: started
+2021/06/07-14:10:56.723 4707 Level-0 table #8: 14627 bytes OK
+2021/06/07-14:10:56.736 4707 Delete type=0 #4

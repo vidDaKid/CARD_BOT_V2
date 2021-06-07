@@ -1,3 +1,2 @@
-2021/06/05-21:05:35.372 ec03 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_iframe.chatid.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/06/05-21:05:35.372 ec03 Recovering log #3
-2021/06/05-21:05:35.372 ec03 Reusing old log /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_iframe.chatid.com_0.indexeddb.leveldb/000003.log 
+2021/06/06-12:25:45.736 11803 Creating DB /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_iframe.chatid.com_0.indexeddb.leveldb since it was missing.
+2021/06/06-12:25:45.755 11803 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_iframe.chatid.com_0.indexeddb.leveldb/MANIFEST-000001

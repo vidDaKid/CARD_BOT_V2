@@ -123,12 +123,12 @@ class Target:
             skip_btn.click()
         except Exception as e:
             self.LOG('No phone number page this time')
-        # Finally fill out the personal information and the card shit
+        # Get personal info from file
+        with open('checkout_info.pickle', 'rb') as f:
+            info = pickle.load(f)
+        sections = list(info) # Gets a list of each attribute
         try:
-            # inna try block in case the personal informations already ready
-            with open('checkout_info.pickle', 'rb') as f:
-                info = pickle.load(f)
-            sections = list(info) # Gets a list of each attribute
+            # Finally fill out the personal information and the card shit
             for i in sections:
                 self.driver.find_element_by_name(i).send_keys(info.iloc[0][i])
         except Exception as e:

@@ -1,3 +1,2 @@
-2021/06/05-21:01:52.332 6607 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_www.target.com_0.indexeddb.leveldb/MANIFEST-000001
-2021/06/05-21:01:52.332 6607 Recovering log #3
-2021/06/05-21:01:52.336 6607 Reusing old log /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_www.target.com_0.indexeddb.leveldb/000003.log 
+2021/06/06-12:24:57.381 20403 Creating DB /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_www.target.com_0.indexeddb.leveldb since it was missing.
+2021/06/06-12:24:57.403 20403 Reusing MANIFEST /Users/vidithbalasa/Desktop/CARD_BOT_V2/c:\temp\profile/Default/IndexedDB/https_www.target.com_0.indexeddb.leveldb/MANIFEST-000001
